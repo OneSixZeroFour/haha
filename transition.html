@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>动画</title>
+</head>
+<script src="../js/vue.js"></script>
+<style>
+	/*进场过渡 .expand-enter=>.expand-transition*/
+	/*离场过渡 .expand-transition=>expand-leave**/
+	/*渲染状态*/
+	.expand-transition{
+		transition:all .3s ease;
+		height: 20px;
+		opacity: 1;
+		background: #abcdef;
+	}
+	.expand-enter{
+		height: 0;
+		opacity: 0;
+	}
+	.expand-leave{
+		height: 0;
+		opacity: 0;
+	}
+	.rotate-transition{
+		transition:all .3s ease;
+		height: 20px;
+		background: #abcdef;
+		opacity: 1;
+	}
+	.rotate-enter{
+		height: 0;
+		opacity: 0;
+		transform: rotate(360deg);
+	}
+	.rotate-leave{
+		height: 0;
+		opacity: 0;
+		transform: rotate(360deg);
+	}
+	.fuck-transition{
+		transition:all .6s ease;
+		height: 20px;
+		opacity: 1;
+	}
+	.fuck-enter,.fuck-leave{
+		height: 0px;
+		opacity: 0;
+	}
+</style>
+<body>
+	<div id="demo">
+		<p>{{name}}</p>
+		<p style="color:red">v-if</p>
+		<button @click='fi=!fi'>OK</button>
+		<div v-if='fi' :transition='expand'>hello fight</div>
+		<p style="color:red">v-show</p>
+			<button @click='show=!show'>OK</button>
+		<select name="" id="" v-model='tran'>
+			<option value="expand">expand</option>
+			<!-- : 类似于表达式{{}} -->
+			<option value="rotate">rotate</option>
+		</select>
+		<div v-show='show' :transition='tran'>hello fight</div>
+		<input type="text" v-model='params'>
+		<ul>
+			<li v-for = 'item in items |filterBy params' transition='fuck'>{{item.msg}}</li>
+		</ul>
+	</div>
+	<!--
+		v-if ng-if
+		v-show ng-show
+		v-for -ng-repeat
+	 -->
+</body>
+	<script>
+		var demo = new Vue({
+			el:'#demo',
+			data:{
+				name:'myName',
+				fi:true,
+				show:true,
+				tran:'expand',
+				params:'',
+				items:[
+					{
+						msg:123123,
+					},{
+						msg:3456,
+					},{
+						msg:3456,
+					},{
+						msg:'name',
+					}
+				]
+			},
+			methods:{
+
+			}
+
+		})
+	</script>
+</html>
